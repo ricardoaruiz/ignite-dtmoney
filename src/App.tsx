@@ -1,8 +1,7 @@
 export const App = () => {
   return (
-    <div className="App">
-      <h1>APP</h1>
+    <div className='App'>
+      <h1>APP 1</h1>
     </div>
   );
-}
-
+};
