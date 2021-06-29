@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should be render correctly 1`] = `
+<body>
+  <div>
+    <header
+      class="sc-gtsrHT fxnCBE"
+    >
+      <div
+        class="sc-bdnxRM ZSPUe"
+      >
+        <img
+          alt="dt money"
+          src="logo.svg"
+        />
+        <button
+          type="button"
+        >
+          Nova transação
+        </button>
+      </div>
+    </header>
+  </div>
+</body>
+`;
