@@ -1,8 +1,9 @@
-import { Header } from 'components';
+import { Dashboard } from 'components';
+
 export const App = () => {
   return (
     <>
-      <Header />
+      <Dashboard />
     </>
   );
 };
