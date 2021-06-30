@@ -8,7 +8,7 @@ import * as S from './styles';
 
 type Types = 'income' | 'outcome' | 'total';
 
-type SummaryProps = {
+export type SummaryProps = {
   type: Types;
   value: number;
 };
@@ -40,10 +40,10 @@ export const SummaryItem = ({ type, value }: SummaryProps) => {
   const isPositive = value >= 0;
 
   return (
-    <S.Wrapper isTotal={isTotal} isPositive={isPositive}>
+    <S.Wrapper isTotal={isTotal} isPositive={isPositive} data-testid='teste'>
       <S.Header>
         <S.Title>{dictionary[type].title}</S.Title>
-        <S.Image src={dictionary[type].image} alt='entradas' />
+        <S.Image src={dictionary[type].image} alt={dictionary[type].title} />
       </S.Header>
       <S.Total>{formatBrlCurrency(value)}</S.Total>
     </S.Wrapper>
