@@ -6,6 +6,7 @@ type TransactionTableProps = {
 };
 
 export type Transaction = {
+  id: number;
   title: string;
   value: number;
   type: string;
@@ -26,14 +27,16 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
         </S.Header>
 
         <S.Body>
-          {transactions.map(({ title, value, type, date }, index) => (
-            <S.Row key={`${title}_${index}`}>
+          {transactions.map(({ id, title, value, type, date }) => (
+            <S.Row key={id}>
               <S.Data isBold>{title}</S.Data>
               <S.Data isPositive={value > 0} isNegative={value < 0}>
                 {formatBrlCurrency(value)}
               </S.Data>
               <S.Data>{type}</S.Data>
-              <S.Data>{Intl.DateTimeFormat('pt-BR').format(date)}</S.Data>
+              <S.Data>
+                {Intl.DateTimeFormat('pt-BR').format(new Date(date))}
+              </S.Data>
             </S.Row>
           ))}
         </S.Body>

@@ -1,6 +1,4 @@
-import { Transaction } from 'components';
-
-export const transactionsMock: Transaction[] = [
+export const transactionsMock = [
   {
     id: 1,
     title: 'Desenvolvimento de site',
