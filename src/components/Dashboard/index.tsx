@@ -1,16 +1,24 @@
 import React from 'react';
 import { Container, Header, Summary, TransactionTable } from 'components';
 import { Transaction } from 'components/TransactionTable';
+import { useTransactions } from 'services/useTransactions';
 
 import * as S from './styles';
 
 export const Dashboard = () => {
   const [transactions, setTransactions] = React.useState<Transaction[]>([]);
+  const { getTransactions } = useTransactions();
 
   React.useEffect(() => {
-    fetch('http://localhost:3000/api/transactions')
-      .then((response) => response.json())
-      .then((data) => setTransactions(data));
+    const loadTransactions = async () => {
+      try {
+        const data = await getTransactions();
+        setTransactions(data);
+      } catch (error) {
+        console.error('Erro ao buscar as transações', error);
+      }
+    };
+    loadTransactions();
   }, []);
 
   return (
