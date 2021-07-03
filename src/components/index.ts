@@ -4,3 +4,4 @@ export * from './Dashboard';
 export * from './Summary';
 export * from './SummaryItem';
 export * from './TransactionTable';
+export * from './NewTransactionModal';

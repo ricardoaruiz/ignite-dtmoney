@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Summary, TransactionTable } from 'components';
+import { Container, Summary, TransactionTable } from 'components';
 import { Transaction } from 'components/TransactionTable';
 import { useTransactions } from 'services/useTransactions';
 
@@ -23,8 +23,6 @@ export const Dashboard = () => {
 
   return (
     <S.Wrapper>
-      <Header />
-
       <Container>
         <Summary income={17400} outcome={1259} total={16141} />
         <TransactionTable transactions={transactions} />

@@ -2,6 +2,10 @@
 import { render, screen } from '@testing-library/react';
 import { Summary } from 'components';
 
+jest.mock('components/NewTransactionModal', () => ({
+  NewTransactionModal: () => <div></div>,
+}));
+
 jest.mock('components/SummaryItem', () => ({
   SummaryItem: () => (
     <div data-testid='mocked-summaryitem'>MockedSummaryItem</div>

@@ -9,11 +9,13 @@ export const GlobalStyles = createGlobalStyle`
     --blue-light: #6933ff;
     --text-tile: #363f5f;
     --text-body: #969cb3;
+    --input-background: #e7e9ee;
+    --input-border: #d7d7d7
 
     --background: #f0f2f5;
     --shape: #ffffff;
   }
-  
+
   * {
     padding: 0;
     margin: 0;
