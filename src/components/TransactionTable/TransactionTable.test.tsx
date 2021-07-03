@@ -1,11 +1,12 @@
 /* eslint-disable no-irregular-whitespace */
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { renderWithTheme } from 'utils/test';
 import { TransactionTable } from '.';
 import { transactionsMock } from './mock';
 
 describe('<TransactionTable />', () => {
   it('should be render correctly', () => {
-    render(<TransactionTable transactions={transactionsMock} />);
+    renderWithTheme(<TransactionTable transactions={transactionsMock} />);
 
     expect(
       screen.getByRole('columnheader', {
@@ -32,7 +33,7 @@ describe('<TransactionTable />', () => {
   });
 
   it('should be render formatted currency column', () => {
-    render(<TransactionTable transactions={[transactionsMock[0]]} />);
+    renderWithTheme(<TransactionTable transactions={[transactionsMock[0]]} />);
     expect(
       screen.getByRole('cell', {
         name: /r\$ 1\.200,00/i,
@@ -41,7 +42,7 @@ describe('<TransactionTable />', () => {
   });
 
   it('should be render formatted date column', () => {
-    render(<TransactionTable transactions={[transactionsMock[0]]} />);
+    renderWithTheme(<TransactionTable transactions={[transactionsMock[0]]} />);
     expect(
       screen.getByRole('cell', {
         name: /01\/07\/2021/i,
@@ -50,7 +51,7 @@ describe('<TransactionTable />', () => {
   });
 
   it('should be render positive currency colum', () => {
-    render(<TransactionTable transactions={[transactionsMock[0]]} />);
+    renderWithTheme(<TransactionTable transactions={[transactionsMock[0]]} />);
     expect(
       screen.getByRole('cell', {
         name: /r\$ 1\.200,00/i,
@@ -59,7 +60,7 @@ describe('<TransactionTable />', () => {
   });
 
   it('should be render negative currency colum', () => {
-    render(<TransactionTable transactions={[transactionsMock[2]]} />);
+    renderWithTheme(<TransactionTable transactions={[transactionsMock[2]]} />);
     expect(
       screen.getByRole('cell', {
         name: /-r\$ 280,23/i,

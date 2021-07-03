@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 type WrapperProps = {
   isTotal: boolean;
@@ -6,26 +6,26 @@ type WrapperProps = {
 };
 
 const wrapperModifiers = {
-  positive: () => css`
-    background-color: var(--green);
-    color: var(--shape);
+  positive: (theme: DefaultTheme) => css`
+    background-color: ${theme.colors.green};
+    color: ${theme.colors.shape};
   `,
-  negative: () => css`
-    background-color: var(--red);
-    color: var(--shape);
+  negative: (theme: DefaultTheme) => css`
+    background-color: ${theme.colors.red};
+    color: ${theme.colors.shape};
   `,
 };
 
 export const Wrapper = styled.div<WrapperProps>`
-  ${({ isTotal, isPositive }) => css`
+  ${({ theme, isTotal, isPositive }) => css`
     width: 35rem;
     padding: 3rem;
-    background-color: var(--shape);
+    background-color: ${theme.colors.shape};
     border-radius: 0.5rem;
-    color: var(--text-tile);
+    color: ${theme.colors.textTitle};
 
-    ${isTotal && isPositive && wrapperModifiers.positive()}
-    ${isTotal && !isPositive && wrapperModifiers.negative()}
+    ${isTotal && isPositive && wrapperModifiers.positive(theme)}
+    ${isTotal && !isPositive && wrapperModifiers.negative(theme)}
   `};
 `;
 

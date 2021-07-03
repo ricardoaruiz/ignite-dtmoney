@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { renderWithTheme } from 'utils/test';
 import { Summary } from 'components';
 
 jest.mock('components/NewTransactionModal', () => ({
@@ -14,7 +15,7 @@ jest.mock('components/SummaryItem', () => ({
 
 describe('<Summary />', () => {
   it('should render correctly', () => {
-    render(<Summary income={1000} outcome={500} total={500} />);
+    renderWithTheme(<Summary income={1000} outcome={500} total={500} />);
     expect(screen.getAllByTestId('mocked-summaryitem')).toHaveLength(3);
   });
 });

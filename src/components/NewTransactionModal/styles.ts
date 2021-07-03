@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 import { darken, transparentize } from 'polished';
 
 export const modalStyles = {
@@ -30,17 +30,19 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  padding: 2rem 2.4rem;
-  font-size: 1.6rem;
-  font-weight: 400;
-  background: var(--input-background);
-  border: 1px solid var(--input-border);
-  border-radius: 5px;
-  outline: none;
+  ${({ theme }) => css`
+    padding: 2rem 2.4rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+    background: ${theme.colors.inputBackground};
+    border: 1px solid ${theme.colors.inputBorder};
+    border-radius: 5px;
+    outline: none;
 
-  &::placeholder {
-    color: var(--text-body);
-  }
+    &::placeholder {
+      color: ${theme.colors.textBody};
+    }
+  `};
 `;
 
 export const TransactionButtons = styled.div`
@@ -49,16 +51,18 @@ export const TransactionButtons = styled.div`
 `;
 
 const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  height: 6.4rem;
-  background-color: var(--shape);
-  border: 1.5px solid var(--input-background);
-  border-radius: 5px;
-  font-size: 1.6rem;
-  transition: filter 0.3s;
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    height: 6.4rem;
+    background-color: ${theme.colors.shape};
+    border: 1.5px solid ${theme.colors.background};
+    border-radius: 5px;
+    font-size: 1.6rem;
+    transition: filter 0.3s;
+  `};
 `;
 
 type TransactionButtonProps = {
@@ -68,20 +72,22 @@ type TransactionButtonProps = {
 
 export type Transactions = 'income' | 'outcome';
 
-const typeButtonSelectedColors = {
-  outcome: transparentize(0.9, '#e52e4d'),
-  income: transparentize(0.9, '#33CC95'),
-};
-
 const typeButtonModifiers = {
-  checked: (transaction: Transactions) => css`
-    background-color: ${typeButtonSelectedColors[transaction]};
-    border: 1.5px solid ${typeButtonSelectedColors[transaction]};
-  `,
+  checked: (theme: DefaultTheme, transaction: Transactions) => {
+    const typeButtonSelectedColors = {
+      outcome: transparentize(0.9, theme.colors.red),
+      income: transparentize(0.9, theme.colors.green),
+    };
+
+    return css`
+      background-color: ${typeButtonSelectedColors[transaction]};
+      border: 1.5px solid ${typeButtonSelectedColors[transaction]};
+    `;
+  },
 };
 
 export const TransactionButton = styled(Button)<TransactionButtonProps>`
-  ${({ isActive, transaction }) => css`
+  ${({ theme, isActive, transaction }) => css`
     transition: all 0.2s;
     & img {
       margin-right: 1.6rem;
@@ -90,22 +96,24 @@ export const TransactionButton = styled(Button)<TransactionButtonProps>`
     }
 
     &:hover {
-      border: 1.5px solid ${darken(0.1, '#e7e9ee')};
+      border: 1.5px solid ${darken(0.1, theme.colors.inputBackground)};
     }
 
-    ${isActive && typeButtonModifiers.checked(transaction)};
+    ${isActive && typeButtonModifiers.checked(theme, transaction)};
   `};
 `;
 
 export const SubmitButton = styled(Button)`
-  font-weight: 600;
-  background-color: var(--green);
-  border: 1.5px solid var(--green);
-  color: var(--shape);
+  ${({ theme }) => css`
+    font-weight: 600;
+    background-color: ${theme.colors.green};
+    border: 1.5px solid ${theme.colors.green};
+    color: ${theme.colors.shape};
 
-  &:hover {
-    filter: brightness(0.9);
-  }
+    &:hover {
+      filter: brightness(0.9);
+    }
+  `};
 `;
 
 export const CloseButton = styled.button`

@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+import { theme } from 'styles/themes/theme';
+import { renderWithTheme } from 'utils/test';
 import { SummaryItem, SummaryProps } from './index';
 
 const mock: Record<string, SummaryProps> = {
@@ -22,7 +24,7 @@ const mock: Record<string, SummaryProps> = {
 
 describe('<Header />', () => {
   it('should be render income type', () => {
-    render(<SummaryItem {...mock.income} />);
+    renderWithTheme(<SummaryItem {...mock.income} />);
 
     expect(screen.getByText(/entradas/i)).toBeInTheDocument();
     expect(screen.getByAltText(/entradas/i)).toBeInTheDocument();
@@ -30,7 +32,7 @@ describe('<Header />', () => {
   });
 
   it('should be render outcome type', () => {
-    render(<SummaryItem {...mock.outcome} />);
+    renderWithTheme(<SummaryItem {...mock.outcome} />);
 
     expect(screen.getByText(/saídas/i)).toBeInTheDocument();
     expect(screen.getByAltText(/saídas/i)).toBeInTheDocument();
@@ -38,18 +40,24 @@ describe('<Header />', () => {
   });
 
   it('should be render positive total type', () => {
-    render(<SummaryItem {...mock.totalPositive} />);
+    renderWithTheme(<SummaryItem {...mock.totalPositive} />);
 
     expect(screen.getByText(/total/i)).toBeInTheDocument();
     expect(screen.getByAltText(/total/i)).toBeInTheDocument();
-    expect(screen.getByText('R$ 500,00')).toBeInTheDocument();
+    expect(screen.getByText('R$ 500,00').parentElement).toHaveStyle({
+      'background-color': theme.colors.green,
+      color: theme.colors.shape,
+    });
   });
 
   it('should be render negative total type', () => {
-    render(<SummaryItem {...mock.totalNegative} />);
+    renderWithTheme(<SummaryItem {...mock.totalNegative} />);
 
     expect(screen.getByText(/total/i)).toBeInTheDocument();
     expect(screen.getByAltText(/total/i)).toBeInTheDocument();
-    expect(screen.getByText('-R$ 500,00')).toBeInTheDocument();
+    expect(screen.getByText('-R$ 500,00').parentElement).toHaveStyle({
+      'background-color': theme.colors.red,
+      color: theme.colors.shape,
+    });
   });
 });

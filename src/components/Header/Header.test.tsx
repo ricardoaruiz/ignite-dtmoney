@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { render } from '@testing-library/react';
+import { renderWithTheme } from 'utils/test';
 import { Header } from './index';
 
 jest.mock('components/NewTransactionModal', () => ({
@@ -9,7 +9,7 @@ jest.mock('components/NewTransactionModal', () => ({
 describe('<Header />', () => {
   it('should be render correctly', () => {
     const onOpenNewTransactionModalMocked = jest.fn();
-    const { container } = render(
+    const { container } = renderWithTheme(
       <Header onOpenNewTransactionModal={onOpenNewTransactionModalMocked} />,
     );
 

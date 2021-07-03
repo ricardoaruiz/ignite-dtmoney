@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, DefaultTheme } from 'styled-components';
 
 export const Wrapper = styled.div``;
 
@@ -14,29 +14,33 @@ export const HeaderRow = styled.tr`
 `;
 
 export const HeaderCell = styled.th`
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: var(--text-body);
-  text-align: left;
-  padding: 2rem 0 2rem 0.5em;
+  ${({ theme }) => css`
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: ${theme.colors.textBody};
+    text-align: left;
+    padding: 2rem 0 2rem 0.5em;
 
-  &:first-of-type {
-    padding-left: 1.5rem;
-  }
-  &:last-of-type {
-    padding-right: 0.5rem;
-  }
+    &:first-of-type {
+      padding-left: 1.5rem;
+    }
+    &:last-of-type {
+      padding-right: 0.5rem;
+    }
+  `};
 `;
 
 export const Body = styled.tbody``;
 
 export const Row = styled.tr`
-  background-color: var(--shape);
-  transition: filter 0.3s;
+  ${({ theme }) => css`
+    background-color: ${theme.colors.shape};
+    transition: filter 0.3s;
 
-  &:hover {
-    filter: brightness(0.9);
-  }
+    &:hover {
+      filter: brightness(0.9);
+    }
+  `};
 `;
 
 type DataProps = {
@@ -46,27 +50,27 @@ type DataProps = {
 };
 
 const dataModifier = {
-  bold: () => css`
-    color: var(--text-title);
+  bold: (theme: DefaultTheme) => css`
+    color: ${theme.colors.textTitle};
   `,
-  positive: () => css`
-    color: var(--green);
+  positive: (theme: DefaultTheme) => css`
+    color: ${theme.colors.green};
   `,
-  negative: () => css`
-    color: var(--red);
+  negative: (theme: DefaultTheme) => css`
+    color: ${theme.colors.red};
   `,
 };
 
 export const Data = styled.td<DataProps>`
-  ${({ isBold, isPositive, isNegative }) => css`
+  ${({ theme, isBold, isPositive, isNegative }) => css`
     font-size: 1.6rem;
-    color: var(--text-body);
+    color: ${theme.colors.textBody};
     text-align: left;
     padding: 2rem 0 2rem 0.5em;
 
-    ${isBold && dataModifier.bold()};
-    ${isPositive && dataModifier.positive()};
-    ${isNegative && dataModifier.negative()};
+    ${isBold && dataModifier.bold(theme)};
+    ${isPositive && dataModifier.positive(theme)};
+    ${isNegative && dataModifier.negative(theme)};
 
     &:first-of-type {
       padding-left: 1.5rem;
