@@ -15,7 +15,7 @@ export const transactionsMock: Transaction[] = [
     value: 590,
     type: 'Venda',
     category: 'Produtos',
-    date: new Date(2021, 6, 1),
+    date: new Date(2021, 6, 10),
   },
   {
     id: 3,
@@ -23,6 +23,6 @@ export const transactionsMock: Transaction[] = [
     value: -280.23,
     type: 'Casa',
     category: 'Contas',
-    date: new Date(2021, 6, 1),
+    date: new Date(2021, 6, 15),
   },
 ];

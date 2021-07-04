@@ -1,12 +1,10 @@
-import { Transaction } from 'types/api/transaction';
 import { formatBRLDate, formatBrlCurrency } from 'utils';
+import { useDtMoneyContext } from 'hooks';
+
 import * as S from './styles';
 
-type TransactionTableProps = {
-  transactions: Transaction[];
-};
-
-export const TransactionTable = ({ transactions }: TransactionTableProps) => {
+export const TransactionTable = () => {
+  const { transactions } = useDtMoneyContext();
   return (
     <S.Wrapper>
       <S.Table>

@@ -7,4 +7,5 @@ export type Transaction = {
   date: Date;
 };
 
-export type TransactionResponse = Record<'transactions', Transaction[]>;
+export type GetTransactionsResponse = Record<'transactions', Transaction[]>;
+export type CreateTransactionResponse = Record<'transaction', Transaction>;

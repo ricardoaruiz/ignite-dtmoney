@@ -2,6 +2,7 @@
 import { screen } from '@testing-library/react';
 import { renderWithTheme } from 'utils/test';
 import { Summary } from 'components';
+import { DtMoneyContextProvider } from 'contexts/DtMoneyContext';
 
 jest.mock('components/NewTransactionModal', () => ({
   NewTransactionModal: () => <div></div>,
@@ -15,7 +16,11 @@ jest.mock('components/SummaryItem', () => ({
 
 describe('<Summary />', () => {
   it('should render correctly', () => {
-    renderWithTheme(<Summary income={1000} outcome={500} total={500} />);
+    renderWithTheme(
+      <DtMoneyContextProvider>
+        <Summary />
+      </DtMoneyContextProvider>,
+    );
     expect(screen.getAllByTestId('mocked-summaryitem')).toHaveLength(3);
   });
 });

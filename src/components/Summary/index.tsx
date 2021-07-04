@@ -1,14 +1,14 @@
 import { SummaryItem } from 'components';
 
+import { useDtMoneyContext } from 'hooks';
+
 import * as S from './styles';
 
-type SummaryProps = {
-  income: number;
-  outcome: number;
-  total: number;
-};
+export const Summary = () => {
+  const {
+    summary: { income, outcome, total },
+  } = useDtMoneyContext();
 
-export const Summary = ({ income, outcome, total }: SummaryProps) => {
   return (
     <S.Wrapper>
       <SummaryItem type='income' value={income} />

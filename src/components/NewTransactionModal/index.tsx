@@ -6,7 +6,7 @@ import outcomeImg from 'assets/outcome.svg';
 import closeImg from 'assets/close.svg';
 
 import { Transaction } from 'types/api/transaction';
-import { useTransactions } from 'services/useTransactions';
+import { useDtMoneyContext } from 'hooks';
 
 import * as S from './styles';
 
@@ -31,35 +31,13 @@ export const NewTransactionModal = ({
   isOpen = false,
   onClose,
 }: NewTransactionModalProps) => {
-  const { createTransaction } = useTransactions();
+  const { addTransaction } = useDtMoneyContext();
+
   const [transaction, setTransaction] =
     React.useState<S.Transactions>('income');
 
   const [data, setData] =
     React.useState<NewTransactionFormData>(initialFormData);
-
-  const handleCreateNewTransaction = React.useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      try {
-        event.preventDefault();
-
-        if (
-          !Object.values(data).every(
-            (value) => String(value) !== '0' && String(value) !== '',
-          )
-        ) {
-          alert('Existem campos obrigatórios que não foram informados.');
-          return;
-        }
-
-        await createTransaction(data);
-      } catch (error) {
-        // TODO: tratar o erro
-        console.log('Erro ao criar uma transação', error);
-      }
-    },
-    [createTransaction, data],
-  );
 
   const handleChangeFormData = React.useCallback(
     (key: string, value: string | number) => {
@@ -81,6 +59,30 @@ export const NewTransactionModal = ({
     setData(initialFormData);
     onClose();
   }, [onClose]);
+
+  const handleCreateNewTransaction = React.useCallback(
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      try {
+        event.preventDefault();
+
+        if (
+          !Object.values(data).every(
+            (value) => String(value) !== '0' && String(value) !== '',
+          )
+        ) {
+          alert('Existem campos obrigatórios que não foram informados.');
+          return;
+        }
+
+        await addTransaction(data);
+        handleCloseModal();
+      } catch (error) {
+        // TODO: tratar o erro
+        console.log('Erro ao criar uma transação', error);
+      }
+    },
+    [addTransaction, data, handleCloseModal],
+  );
 
   return (
     <Modal
