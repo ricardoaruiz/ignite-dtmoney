@@ -1,16 +1,9 @@
-import { formatBrlCurrency } from 'utils/numbers';
+import { Transaction } from 'types/api/transaction';
+import { formatBRLDate, formatBrlCurrency } from 'utils';
 import * as S from './styles';
 
 type TransactionTableProps = {
   transactions: Transaction[];
-};
-
-export type Transaction = {
-  id: number;
-  title: string;
-  value: number;
-  type: string;
-  date: Date;
 };
 
 export const TransactionTable = ({ transactions }: TransactionTableProps) => {
@@ -27,18 +20,17 @@ export const TransactionTable = ({ transactions }: TransactionTableProps) => {
         </S.Header>
 
         <S.Body>
-          {transactions.map(({ id, title, value, type, date }) => (
-            <S.Row key={id}>
-              <S.Data isBold>{title}</S.Data>
-              <S.Data isPositive={value > 0} isNegative={value < 0}>
-                {formatBrlCurrency(value)}
-              </S.Data>
-              <S.Data>{type}</S.Data>
-              <S.Data>
-                {Intl.DateTimeFormat('pt-BR').format(new Date(date))}
-              </S.Data>
-            </S.Row>
-          ))}
+          {!!transactions.length &&
+            transactions.map(({ id, title, value, category, date }) => (
+              <S.Row key={id}>
+                <S.Data isBold>{title}</S.Data>
+                <S.Data isPositive={value > 0} isNegative={value < 0}>
+                  {formatBrlCurrency(value)}
+                </S.Data>
+                <S.Data>{category}</S.Data>
+                <S.Data>{formatBRLDate(new Date(date))}</S.Data>
+              </S.Row>
+            ))}
         </S.Body>
       </S.Table>
     </S.Wrapper>

@@ -1,4 +1,4 @@
-import { Transaction } from 'components';
+import { Transaction } from 'types/api/transaction';
 
 export const transactionsMock: Transaction[] = [
   {
@@ -6,6 +6,7 @@ export const transactionsMock: Transaction[] = [
     title: 'Desenvolvimento de site',
     value: 1200,
     type: 'Venda',
+    category: 'Produtos',
     date: new Date(2021, 6, 1),
   },
   {
@@ -13,6 +14,7 @@ export const transactionsMock: Transaction[] = [
     title: 'Venda da bicicleta',
     value: 590,
     type: 'Venda',
+    category: 'Produtos',
     date: new Date(2021, 6, 1),
   },
   {
@@ -20,6 +22,7 @@ export const transactionsMock: Transaction[] = [
     title: 'Pagamento da conta de luz',
     value: -280.23,
     type: 'Casa',
+    category: 'Contas',
     date: new Date(2021, 6, 1),
   },
 ];
