@@ -6,7 +6,7 @@ import { useTransactions } from 'services/useTransactions';
 type DtMoneyContextProviderType = {
   transactions: Transaction[];
   summary: SummaryType;
-  addTransaction: (transaction: Transaction) => void;
+  addTransaction: (transaction: Transaction) => Promise<void>;
 };
 
 type DtMoneyContextProviderProps = {
@@ -40,20 +40,14 @@ export const DtMoneyContextProvider = ({
       (sum: SummaryType, trx: Transaction) => {
         switch (trx.type) {
           case 'income':
-            return {
-              ...sum,
-              income: sum.income + trx.value,
-              total: sum.total + trx.value,
-            };
+            sum.income += trx.value;
+            break;
           case 'outcome':
-            return {
-              ...sum,
-              outcome: sum.outcome + trx.value,
-              total: sum.total + trx.value,
-            };
-          default:
-            return sum;
+            sum.outcome += trx.value;
+            break;
         }
+        sum.total += trx.value;
+        return sum;
       },
       {
         income: 0,
